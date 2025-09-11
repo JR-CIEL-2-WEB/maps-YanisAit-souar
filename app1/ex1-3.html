@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>json Employes</title>
+	</head>
+<body>
+
+<h1>JSON.parse()</h1>
+<hr>
+<div id="demo">...</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	// au chargement de la page
+	window.onload = loadDoc();
+
+
+	// Ajax avec JQuery
+	function loadDoc() {
+		$.ajax({
+					url: "?",
+					method: "?",
+					dataType: "?",
+					success: function(CDs){
+						/* CDs representera un objet JSON retourné par le serveur */
+						/* compléter le code de la fonction afin d'afficher les CD de CDs à la console */
+						/* vous utiliserez deux boucles for
+							- boucle for classique sur CDs
+							- boucle for in sur CD
+						 */
+					}
+				}
+		);
+		  //console.log("ok");
+	};
+
+
+</script>
+
+</body>
+</html
