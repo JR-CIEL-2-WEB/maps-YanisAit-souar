@@ -1,0 +1,12 @@
+
+#map {
+  height: 80vh;
+  width: 100%;
+}
+
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
