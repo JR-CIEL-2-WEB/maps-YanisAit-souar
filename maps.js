@@ -1,7 +1,11 @@
 // Coordonnées GPS pour Villepinte
 const villepinteLocations = [
-  ["Lycée Georges Brassens", 48.9580, 2.5450, 1],  
-  ["Stade Municipal", 48.9600, 2.5380, 2],         
+  ["Lycée Jean Rostand", 48.959136, 2.545756, 1],
+  ["Point 2", 48.960916, 2.542787, 1], 
+  ["Point 3", 48.959240, 2.548237, 1], 
+  ["Point 4", 48.959803, 2.548774, 1], 
+  ["Point 5", 48.961606, 2.553237, 1], 
+  ["Point 6", 48.963382, 2.550126, 1],           
 ];
 
 function initMap() {
