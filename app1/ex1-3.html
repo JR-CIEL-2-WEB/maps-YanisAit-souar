@@ -14,6 +14,7 @@
 <script>
 	// au chargement de la page
 	window.onload = loadDoc();
+	console.log("ex1-3")
 
 
 	// Ajax avec JQuery
@@ -29,14 +30,18 @@
 							- boucle for classique sur CDs
 							- boucle for in sur CD
 						 */
+						for (let i = 0; i < CDs.length; i++) {
+							let CD = CDs[i];
+							console.log("CD [" + (i + 1) + "] =");
+							for (let clef in CD) {
+								if (CD.hasOwnProperty(clef)) {
+									console.log(clef + " : " + CD[clef]);
+						}
 					}
 				}
-		);
-		  //console.log("ok");
-	};
-
-
+			}
+		});
+	}
 </script>
-
 </body>
-</html
+</html>

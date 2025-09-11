@@ -13,6 +13,7 @@
 </div>
 
 <script type="text/javascript">
+   console.log("ex1-2")
 	var CDs = `[
    {
       "TITLE": "Empire Burlesque",
@@ -231,7 +232,7 @@
 		var cdList = JSON.parse(CDs);
 		for (var i = 0; i < cdList.length; i++) {
 			var cd = cdList[i];
-			console.log("--- CD n°" + (i + 1) + " ---");
+			console.log("CD [" + (i + 1) + "] =");
 			for (var clef in cd) {
 				if (cd.hasOwnProperty(clef)) {
 					console.log(clef + " : " + cd[clef]);
