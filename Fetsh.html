@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JRostand Reperes Stade</title>
+    <style>
+         #map { height: 100%; }
+        html, body { height: 100%; margin: 0; padding: 0; }
+    </style>
+    <!-- Charger l'API Google Maps avec la nouvelle version -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&loading=async&libraries=marker&v=weekly" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>JRostand Reperes Stade</h1>
+    <hr>
+    <div id="map"></div>
+    <script>
+        // Au chargement de la page
+        window.onload = loadDoc;
+
+        async function loadDoc() {
+            try {
+                const response = await fetch('markersJrostand.json');
+                if (!response.ok) throw new Error('Erreur réseau');
+                const markers = await response.json();
+                
+                for (var i = 0; i < markers.length; i++) {
+                    var marker = markers[i];
+                    for (var key in marker) {
+                        if (marker.hasOwnProperty(key)) {
+                            console.log(key + ": " + marker[key]);
+                        }
+                    }
+                    console.log("---");
+                }
+                
+                
+                await initMap(markers);
+                
+            } catch (error) {
+                console.error('Erreur lors du chargement des marqueurs :', error);
+                // Initialiser la carte avec des marqueurs par défaut en cas d'erreur
+                const defaultMarkers = [
+                    { lat: 48.95930033308523, lng: 2.5477890651742516 }
+                ];
+                await initMap(defaultMarkers);
+            }
+        }
+
+        async function initMap(markersData) {
+            const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+            const center = markersData.length > 0 ? markersData[0] : { lat: 48.95930033308523, lng: 2.5477890651742516 };
+            
+            const map = new Map(document.getElementById("map"), {
+                zoom: 16,
+                center: center,
+            });
+
+            const infoWindow = new InfoWindow();
+
+            markersData.forEach((markerData, i) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: markerData.lat, lng: markerData.lng },
+                    map: map,
+                    title: `Marqueur ${i + 1}`
+                });
+
+                marker.addListener('click', function() {
+                    infoWindow.close();
+                    infoWindow.setContent(`
+                        <div style="padding: 10px; font-family: Arial, sans-serif;">
+                            <h3 style="margin: 0 0 10px 0; color: #333; font-size: 16px;">
+                                Marqueur ${i + 1}
+                            </h3>
+                            <p style="margin: 0; color: #666; font-size: 14px;">
+                                Le marqueur ${i + 1} a été cliqué
+                            </p>
+                        </div>
+                    `);
+                    infoWindow.open(map, marker);
+                });
+            });
+
+            // Créer la polyline si il y a plus d'un marqueur
+            if (markersData.length > 1) {
+                const polyline = new google.maps.Polyline({
+                    path: markersData,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+                polyline.setMap(map);
+            }
+        }
+    </script>
+</body>
+</html>

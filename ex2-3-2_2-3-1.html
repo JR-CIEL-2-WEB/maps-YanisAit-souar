@@ -4,8 +4,21 @@
     <meta charset="utf-8">
     <title>JRostand Reperes Stade</title>
     <style>
-        #map { height: 100%; }
+         #map { height: 100%; }
         html, body { height: 100%; margin: 0; padding: 0; }
+        #notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 16px;
+            display: none; 
+            z-index: 1000;
+        }
     </style>
     <!-- Définir la fonction initMap avant de charger l'API -->
     <script>
@@ -53,6 +66,7 @@
                         map: map,
                         title: 'Marqueur ' + (i+1)
                     });
+                    
                 }
 
                 
