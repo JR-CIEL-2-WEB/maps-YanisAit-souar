@@ -32,11 +32,11 @@
 	function readTab() {
 		var cdObj = JSON.parse(CD);
 
-		for (var clef in cdObj) {
+		for (var x in cdObj) {
 
-			if (cdObj.hasOwnProperty(clef)) {
+			if (cdObj.hasOwnProperty(x)) {
 
-				console.log(clef + " : " + cdObj[clef]);
+				console.log(x + " : " + cdObj[x]);
 			}
 		}
 	}
