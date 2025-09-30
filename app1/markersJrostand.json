@@ -14,31 +14,31 @@
     "description": "Point 2"
   },
   {
-    "id": 3,
-    "name": "Point 3",
+    "id": 6,
+    "name": "Point 6",
     "lat": 48.959240,
     "lng": 2.548237,
-    "description": "Point 3"
-  },
-  {
-    "id": 4,
-    "name": "Point 4",
-    "lat": 48.959803,
-    "lng": 2.548774,
-    "description": "Point 4"
+    "description": "Point 6"
   },
   {
     "id": 5,
     "name": "Point 5",
-    "lat": 48.961606,
-    "lng": 2.553237,
+    "lat": 48.959803,
+    "lng": 2.548774,
     "description": "Point 5"
   },
   {
-    "id": 6,
-    "name": "Point 6",
+    "id": 4,
+    "name": "Point 4",
+    "lat": 48.961606,
+    "lng": 2.553237,
+    "description": "Point 4"
+  },
+  {
+    "id": 3,
+    "name": "Point 3",
     "lat": 48.963382,
     "lng": 2.550126,
-    "description": "Point 6"
+    "description": "Point 3"
   }
 ]

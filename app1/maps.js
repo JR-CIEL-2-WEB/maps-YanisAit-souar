@@ -1,46 +1,63 @@
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 15,
-    center: { lat: 48.9580, lng: 2.5450 },  // Position centrale de Villepinte
-  });
+window.onload = loadDoc;
 
-  
+function loadDoc() {
   fetch('markersJrostand.json')
-    .then(response => response.json())  
-    .then(data => {
-      setMarkers(map, data);  
+    .then(response => {
+      if (!response.ok) throw new Error('Erreur réseau');
+      return response.json();
     })
-    .catch(error => console.error('Erreur de chargement du fichier JSON:', error));
-}
+    .then(markers => {
+      console.log("Données JSON chargées :", markers);
 
-function setMarkers(map, markersData) {
-  const icon = {
-    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-    scaledSize: new google.maps.Size(32, 32), 
-  };
+      // Centre de la carte = premier point du fichier
+      const center = markers.length > 0
+        ? { lat: markers[0].lat, lng: markers[0].lng }
+        : { lat: 48.9593, lng: 2.5477 };
 
-  const infowindow = new google.maps.InfoWindow(); 
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: center,
+        zoom: 15
+      });
 
-  markersData.forEach(markerData => {
-    const marker = new google.maps.Marker({
-      position: { lat: markerData.lat, lng: markerData.lng },
-      map: map,
-      icon: icon,
-      title: markerData.name,
+      // InfoWindow réutilisable
+      const infowindow = new google.maps.InfoWindow();
+
+      // Création des marqueurs
+      markers.forEach(markerData => {
+        const marker = new google.maps.Marker({
+          position: { lat: markerData.lat, lng: markerData.lng },
+          map: map,
+          title: markerData.name
+        });
+
+        // Clic sur le marqueur → InfoWindow
+        marker.addListener('click', () => {
+          infowindow.setContent(`
+            <div>
+              <h3>${markerData.name}</h3>
+              <p><strong>ID :</strong> ${markerData.id}</p>
+              <p>${markerData.description}</p>
+            </div>
+          `);
+          infowindow.open(map, marker);
+        });
+      });
+
+      // Trier les marqueurs par ID avant de tracer la polyligne
+      const sortedMarkers = markers.sort((a, b) => a.id - b.id);
+
+      if (sortedMarkers.length > 1) {
+        const polyline = new google.maps.Polyline({
+          path: sortedMarkers.map(m => ({ lat: m.lat, lng: m.lng })),
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 3
+        });
+        polyline.setMap(map);
+      }
+    })
+    .catch(error => {
+      console.error('Erreur lors du chargement des marqueurs :', error);
     });
-
-    marker.addListener("click", function () {
-      const contentString = `
-        <div>
-          <h3>${markerData.name}</h3>
-          <p><strong>ID du marqueur : </strong>${markerData.id}</p>
-          <p>${markerData.description}</p>
-        </div>
-      `;
-      infowindow.setContent(contentString);
-      infowindow.open(map, marker); 
-    });
-  });
 }
-
-window.initMap = initMap;
