@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nginx:
+    image: mtobji/custom-nginx:V2
+    ports:
+      - "8092:80"
+    volumes:
+      - ./app1:/usr/share/nginx/html:rw
+    restart: unless-stopped
