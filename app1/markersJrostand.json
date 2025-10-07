@@ -40,5 +40,19 @@
     "lat": 48.963382,
     "lng": 2.550126,
     "description": "Point 3"
+  },
+  {
+    "id": 2006,
+    "name": "Japon, Shibuya ",
+    "lat": 35.664035,
+    "lng": 139.698212,
+    "description": "Repos a Gojo Satoru qui est mort en pleins milieu"
+  },
+  {
+    "id": 2007,
+    "name": "Chicken Spot, Mitry-Mory",
+    "lat": 48.955079,
+    "lng": 2.599444,
+    "description": "Chicken Spot, Mitry-Mory. Du bon poulet épicée qui vous fera voyager durant un long moment"
   }
 ]

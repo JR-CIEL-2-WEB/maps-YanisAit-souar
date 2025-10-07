@@ -30,21 +30,29 @@ function loadDoc() {
           title: markerData.name
         });
 
-        // Clic sur le marqueur → InfoWindow
+        // Clic sur le marqueur → PopUp
         marker.addListener('click', () => {
+          if (markerData.id < 15 && markerData.id !== 2006 && markerData.id !== 2007) {
+            alert("Le marker " + markerData.id + " a été cliqué");
+          }
+          if (markerData.id === 2006 || markerData.id === 2007) {
           infowindow.setContent(`
             <div>
               <h3>${markerData.name}</h3>
-              <p><strong>ID :</strong> ${markerData.id}</p>
               <p>${markerData.description}</p>
             </div>
           `);
           infowindow.open(map, marker);
+          }
         });
       });
 
+      
+
       // Trier les marqueurs par ID avant de tracer la polyligne
-      const sortedMarkers = markers.sort((a, b) => a.id - b.id);
+    const sortedMarkers = markers
+    .filter(m => m.id !== 2006 && m.id !== 2007)  
+    .sort((a, b) => a.id - b.id);
 
       if (sortedMarkers.length > 1) {
         const polyline = new google.maps.Polyline({
