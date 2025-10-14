@@ -31,6 +31,7 @@ function loadDoc() {
         });
 
         // Clic sur le marqueur → PopUp
+        
         marker.addListener('click', () => {
           if (markerData.id < 15 && markerData.id !== 2006 && markerData.id !== 2007) {
             alert("Le marker " + markerData.id + " a été cliqué");
